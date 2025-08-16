@@ -1,86 +1,41 @@
-介绍
-=============================
-wxwork_pc_api 使用HOOK技术将核心功能封装成dll，并提供简易的接口给支持调用dll的语言使用。
+string wechat="perk2020"
 
-你可以通过扩展 wxwork_pc_api 来实现：
+后台客服系统：集成排队，自动分配客服、20种消息类型兼容，完全可以替代手机的，web客服系统。
 
-* 监控或收集企业微信消息
-* 自动消息推送
-* 聊天机器人
-* 通过企业微信远程控制你的设备
+企微ipad最新功能升级如下：
 
-目前测试可以使用语言有C/C++，C#，易语言，Python, Java, Go, NodeJs, PHP, VB, Delphi。
-
-功能清单
------------------------------------
-- 接收用户登录消息
-- 接收用户注销消息
-- 发送文本
-- 发送文件
-- 发送视频
-- 发送图片
-- 发送名片
-- 发送图文卡片
-- 接收文本消息
-- 接收图片消息
-- 接收语音消息
-- 接收名片消息
-- 接收视频消息
-- 接收表情消息
-- 接收位置消息
-- 接收图文卡片消息
-- 接收文件消息
-- 接收红包消息
-- 接收小程序消息
-
-具体使用可以暂时参考samples/python/demo.py, 如下是python封装后的调用
-
-```python
-import wxwork
-import json
-import time
-from wxwork import WxWorkManager,MessageType
-
-wxwork_manager = WxWorkManager(libs_path='../../libs')
-
-# 这里测试函数回调
-@wxwork.CONNECT_CALLBACK(in_class=False)
-def on_connect(client_id):
-    print('[on_connect] client_id: {0}'.format(client_id))
-
-@wxwork.RECV_CALLBACK(in_class=False)
-def on_recv(client_id, message_type, message_data):
-    print('[on_recv] client_id: {0}, message_type: {1}, message:{2}'.format(client_id, 
-    message_type, json.dumps(message_data)))
-
-@wxwork.CLOSE_CALLBACK(in_class=False)
-def on_close(client_id):
-    print('[on_close] client_id: {0}'.format(client_id))
+【初始化】
+ 初始化企业微信，设置消息回调地址，获取运行中的实例，根据uuid查看实例详情，关闭链接，设置或者取消代理接口
+【登录】
+获取登录二维码，输入验证码设置，自动登录，退出登录，获取二次验证二维码接口
+【发送消息及消息获取】
+撤回消息，发送文本消息，发送文本表情消息，发送CDN图片消息，发送CDN文件消息，发送CDN语音消息，发送CDN视频消息，发送大视频文件，发送大文件消息，发送连接卡片，发送小程序，发送视频号消息，发送gif表情，发送名片消息，发送位置消息，发送群@消息，格式化发送@消息，同步消息记录，群发消息，语音转文字，已读消息，发送引用消息
+【群操作】
+获取客户群列表，获取群成员列表，获取会话列表中的群聊，同意进群，二维码进群，创建内部群聊，创建外部群聊，发送群公告，修改群名，发送链接的方式邀请成员进群，直接邀请进群，移除群成员，设置群内昵称，转让群主，解散群，获取群二维码，获取欢迎语列表，添加欢迎语，设置欢迎语，取消欢迎语，添加群成员好友，退出群聊，获取群成员列表简洁版，获取群详细和头像，获取群头像
+【群设置】
+设置群备注，禁止修改群名，群邀请确认，移除群管理，设置群管理，获取群防骚扰规则列表，设置或者移除群防骚扰规则，获取群聊黑名单列表，添加或者移除群聊黑名单，禁止群内添加和禁止修改群名
+【开放平台】
+企业用户id转开放平台id，开放平台id转企业用户id，群id转chatid，chatid转群id
+【标签】
+获取标签列表，添加标签，修改标签，删除标签，一个标签多个用户，一个用户多个标签
+【CDN服务】
+获取大文件authkey，大文件网络上传，大文件上传，大文件下载，CDN上传网络图片，CDN上传本地图片，CDN上传网络视频，CDN上传本地视频，CDN上传网络文件，CDN上传本地文件，CDN下载文件，外部联系人图片视频文件下载
+【 独立CDN服务调用方式】
+获取CDN初始化参数，初始化CDN服务，CDN上传网络图片重置版，CDN上传本地图片重置版，CDN上传网络视频，CDN上传视频重置版本，文件和语音silk格式CDN上传网络文件，文件和语音silk格式CDN上传文件重置版本
+【联系人操作】
+获取内部联系人列表，获取外部联系人列表，根据用户id批量获取详细信息，同意好友，删除联系人，获取好友申请列表，获取会话列表，修改联系人备注手机简介企业，内部联系人备注修改，获取内部联系人备注列表，置顶设置或者取消，免打扰设置或者取消，免打扰并且折叠设置或者取消，星星标记设置或者取消，拉黑或者移除拉黑联系人，根据手机号搜索联系人，搜索添加外部联系人，搜索添加企微用户，根据名片添加好友，直接添加好友，共享联系人，添加共享联系人，获取互联网企业CircleIds，获取互联企业成员部门列表，获取企业互联组id，获取企业互联成员部门企业列表
+【账号基础操作】
+获取当前账号详情，获取当前账号二维码，获取当前账号对外名片二维码，设置头像，设置用户信息，设置是否自动同意，根据i企业d获取企业详情，获取当前账号封禁原因，上传图片到企微
+【朋友圈操作】
+获取朋友圈列表，发送朋友圈，删除朋友圈，获取朋友圈详情，发送朋友圈评论，删除朋友圈评论，朋友圈点赞或者取消点赞
+【控制台群发】
+确认群发消息，获取未发送群发列表，客户群发送任务，获取要发送的客户群列表，获取群发任务详细信息，朋友圈控制台任务执行，管理员获取企业成员客户列表
+【聊天标签】
+增删改聊天标签，获取聊天标签列表，获取标签下的联系人，新增联系人移除联系人到聊天标签
+【客服管理】
+获取客服列表，获取客服详情，获取客服当前状态，设置客服接待状态，获取咨询排队列表，接入咨询排队列表中的客户，获取转接的客服列表，结束会话，会话转接给其他同事
+【商户收款】
+获取商户列表，获取收款二维码，发送收款小程序
 
 
-class EchoBot(wxwork.CallbackHandler):
-
-
-    @wxwork.RECV_CALLBACK(in_class=True)
-    def on_message(self, client_id, message_type, message_data):
-
-        # 如果是文本消息，就回复一条消息
-        if message_type == MessageType.MT_RECV_TEXT_MSG:
-            reply_content = '😂😂😂你发过来的消息是：{0}'.format(message_data['content'])
-            time.sleep(2)
-            wxwork_manager.send_text(client_id, message_data['conversation_id'], reply_content)
-
-
-if __name__ == "__main__":
-    echoBot = EchoBot()
-
-    # 添加回调实例对象
-    wxwork_manager.add_callback_handler(echoBot)
-    wxwork_manager.manager_wxwork(smart=True)
-
-    # 阻塞主线程
-    while True:
-        time.sleep(0.5)
-
-```
 
